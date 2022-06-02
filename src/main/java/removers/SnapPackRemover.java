@@ -9,24 +9,22 @@ import javax.swing.DefaultListModel;
  * @author bismih
  */
 public class SnapPackRemover {
-    public static DefaultListModel<String> model=new DefaultListModel<>();
-    
+    public static DefaultListModel<String> model = new DefaultListModel<>();
+
     public static void addNativeToList(String tex) {
         if (!model.contains(tex)) {
             model.addElement(tex);
         }
     }
-        
-    
+
     public static void getNativeAppList() {
         model.clear();
-        String[] cmd = {"/bin/bash", "-c", "ls /snap/bin "};
+        // ?snap paketleri bulur
+        String[] script = { "/bin/bash", "-c", "ls /snap/bin " };
         try {
-            Process pb = Runtime.getRuntime().exec(cmd);
+            Process pb = Runtime.getRuntime().exec(script);
 
             String line;
-            String result = "";
-            String deneme = "";
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pb.getInputStream()));
             while ((line = input.readLine()) != null) {
@@ -35,19 +33,17 @@ public class SnapPackRemover {
 
             }
             input.close();
-            System.out.println(deneme + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-        
-    
-    public static void removeNativeApp(int index,String pass) {
+
+    public static void removeNativeApp(int index, String pass) {
         System.out.println(model.get(index));
-        
-        String[] cmd = {"/bin/bash", "-c", "echo "+pass+"|sudo -S snap remove " + model.get(index)};
+
+        String[] script = { "/bin/bash", "-c", "echo " + pass + "|sudo -S snap remove " + model.get(index) };
         try {
-            Process pb = Runtime.getRuntime().exec(cmd);
+            Process pb = Runtime.getRuntime().exec(script);
 
             String line;
 

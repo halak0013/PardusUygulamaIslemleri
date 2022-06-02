@@ -24,13 +24,11 @@ public class AppimagePackRemover {
     
     public static void getNativeAppList() {
         model.clear();
-        String[] cmd = {"/bin/bash", "-c", "ls ~/Applications/"};
+        String[] script = {"/bin/bash", "-c", "ls ~/Applications/"};
         try {
-            Process pb = Runtime.getRuntime().exec(cmd);
+            Process pb = Runtime.getRuntime().exec(script);
 
             String line;
-            String result = "";
-            String deneme = "";
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pb.getInputStream()));
             while ((line = input.readLine()) != null) {
@@ -40,7 +38,6 @@ public class AppimagePackRemover {
                 }
             }
             input.close();
-            System.out.println(deneme + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,9 +45,9 @@ public class AppimagePackRemover {
         
     
     public static void removeNativeApp(int index) {
-        String[] cmd = {"/bin/bash", "-c", "rm ~/Applications/ "+ appPackage.get(index)};
+        String[] script = {"/bin/bash", "-c", "rm ~/Applications/ "+ appPackage.get(index)};
         try {
-            Process pb = Runtime.getRuntime().exec(cmd);
+            Process pb = Runtime.getRuntime().exec(script);
 
             String line;
 

@@ -24,13 +24,12 @@ public class FlatackPackRemover {
     
     public static void getNativeAppList() {
         model.clear();
-        String[] cmd = {"/bin/bash", "-c", "ls /var/lib/flatpak/app"};
+        //? flatpak paketlerini bulur
+        String[] script = {"/bin/bash", "-c", "ls /var/lib/flatpak/app"};
         try {
-            Process pb = Runtime.getRuntime().exec(cmd);
+            Process pb = Runtime.getRuntime().exec(script);
 
             String line;
-            String result = "";
-            String deneme = "";
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pb.getInputStream()));
             while ((line = input.readLine()) != null) {
@@ -40,7 +39,6 @@ public class FlatackPackRemover {
                 }
             }
             input.close();
-            System.out.println(deneme + result);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,9 +46,9 @@ public class FlatackPackRemover {
         
     
     public static void removeNativeApp(int index) {
-        String[] cmd = {"/bin/bash", "-c", "flatpak uninstall "+ appPackage.get(index) +" -y"};
+        String[] script = {"/bin/bash", "-c", "flatpak uninstall "+ appPackage.get(index) +" -y"};
         try {
-            Process pb = Runtime.getRuntime().exec(cmd);
+            Process pb = Runtime.getRuntime().exec(script);
 
             String line;
 

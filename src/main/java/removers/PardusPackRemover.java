@@ -20,9 +20,9 @@ public class PardusPackRemover {
     public static void getNativeAppList() {
         model.clear();
         // ? uygulamaların isimleri için kısayolların içeriklerini alınıyor
-        String[] cmd = { "/bin/bash", "-c", "cat /usr/share/applications/*.desktop " };
+        String[] script = { "/bin/bash", "-c", "cat /usr/share/applications/*.desktop " };
         try {
-            Process pb = Runtime.getRuntime().exec(cmd);
+            Process pb = Runtime.getRuntime().exec(script);
 
             String line;
             String result = "";
@@ -74,9 +74,9 @@ public class PardusPackRemover {
 
     public static void removeNativeApp(String app, String pass) {
         //? root olarak uygulmalyı silmek için gerekli komutları çalıştırıyor
-        String[] cmd = { "/bin/bash", "-c", "echo " + pass + "|sudo -S apt remove " + app + " -y" };
+        String[] script = { "/bin/bash", "-c", "echo " + pass + "|sudo -S apt remove " + app + " -y" };
         try {
-            Process pb = Runtime.getRuntime().exec(cmd);
+            Process pb = Runtime.getRuntime().exec(script);
 
             String line;
 
