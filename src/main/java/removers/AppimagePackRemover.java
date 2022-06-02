@@ -11,20 +11,21 @@ import javax.swing.DefaultListModel;
  * @author bismih
  */
 public class AppimagePackRemover {
-    public static DefaultListModel<String> model=new DefaultListModel<>();
-    private static ArrayList<String> appPackage=new ArrayList<>();
-    
+    public static DefaultListModel<String> model = new DefaultListModel<>();
+    private static ArrayList<String> appPackage = new ArrayList<>();
+
     public static void addNativeToList(String tex) {
-        if (!model.contains(tex)) {
-            model.addElement(tex.substring(0,tex.lastIndexOf("-")));
-            appPackage.add(tex);
+        if (tex.contains("-")) {
+            model.addElement(tex.substring(0, tex.lastIndexOf("-")));
+        } else {
+            model.addElement(tex);
         }
+        appPackage.add(tex);
     }
-        
-    
+
     public static void getNativeAppList() {
         model.clear();
-        String[] script = {"/bin/bash", "-c", "ls ~/Applications/"};
+        String[] script = { "/bin/bash", "-c", "ls ~/Applications/" };
         try {
             Process pb = Runtime.getRuntime().exec(script);
 
@@ -33,7 +34,7 @@ public class AppimagePackRemover {
             BufferedReader input = new BufferedReader(new InputStreamReader(pb.getInputStream()));
             while ((line = input.readLine()) != null) {
 
-                if(!line.isEmpty()){
+                if (!line.isEmpty()) {
                     addNativeToList(line);
                 }
             }
@@ -42,10 +43,11 @@ public class AppimagePackRemover {
             e.printStackTrace();
         }
     }
-        
-    
+
     public static void removeNativeApp(int index) {
-        String[] script = {"/bin/bash", "-c", "rm ~/Applications/ "+ appPackage.get(index)};
+        System.out.println(appPackage.get(index));
+        
+        String[] script = { "/bin/bash", "-c", "rm ~/Applications/" + "\""+appPackage.get(index)+"\"" };
         try {
             Process pb = Runtime.getRuntime().exec(script);
 
