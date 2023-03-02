@@ -6,5 +6,7 @@ Pardus için debain paketlerini, Appimage paketlerini, flatpack paketlerini, sna
 
 kullanmak için 
 releaseden jar indirip terminalden aşşağıdaki komut çalıştırılmalı
-' java -jar PardusUygulamaIslemleri.jar' 
+
+
+```java -jar PardusUygulamaIslemleri.jar```
 
